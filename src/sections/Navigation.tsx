@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu } from 'lucide-react';
 import {
   Sheet,
@@ -10,9 +10,11 @@ import {
 } from '@/components/ui/sheet';
 
 const navLinks = [
-  { label: 'Work', id: 'work' },
   { label: 'About', id: 'about' },
   { label: 'Experience', id: 'experience' },
+  { label: 'Forecasting', id: 'forecasting' },
+  { label: 'Projects', id: 'projects' },
+  { label: 'Impact', id: 'impact' },
   { label: 'Contact', id: 'contact' },
 ];
 
@@ -20,90 +22,123 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Scroll-spy: highlight the section currently in view
   useEffect(() => {
-    const ids = ['work', 'about', 'experience', 'contact'];
-    const sections = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    const sections = navLinks
+      .map((l) => document.getElementById(l.id))
+      .filter((el): el is HTMLElement => el !== null);
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActiveSection(e.target.id);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
         });
       },
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
     );
+
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
   }, []);
 
   const scrollTo = (id: string) => {
     setOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-cream/85 backdrop-blur-md border-b border-ink/8 shadow-[0_1px_0_rgba(28,25,23,0.04)]'
-          : 'bg-transparent'
-      }`}
+      ref={navRef}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      style={{
+        background: scrolled ? 'rgba(17, 15, 15, 0.6)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(234, 234, 234, 0.08)' : '1px solid transparent',
+      }}
     >
-      <div className="section-container flex h-[68px] items-center justify-between">
+      <div className="section-container flex h-[72px] items-center justify-between">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="font-display text-xl text-ink tracking-[-0.02em]"
+          className="font-display text-2xl text-text-light tracking-[-0.02em]"
         >
           Vishal Ghosh
         </button>
 
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => scrollTo(link.id)}
-              className={`text-sm font-medium transition-colors duration-300 ${
-                activeSection === link.id ? 'text-accent' : 'text-ink-muted hover:text-ink'
-              }`}
-            >
-              {link.label}
-            </button>
-          ))}
-          <button onClick={() => scrollTo('contact')} className="btn-primary !py-2.5 !px-5 !text-[13px]">
-            Let&apos;s talk
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-7">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <button
+                key={link.id}
+                onClick={() => scrollTo(link.id)}
+                className={`relative text-label font-medium tracking-[0.02em] transition-colors duration-300 ${
+                  isActive ? 'text-amber' : 'text-text-light hover:text-amber'
+                }`}
+              >
+                {link.label}
+                <span
+                  className={`absolute -bottom-1.5 left-0 h-px bg-amber transition-all duration-300 ${
+                    isActive ? 'w-full' : 'w-0'
+                  }`}
+                />
+              </button>
+            );
+          })}
+          <button
+            onClick={() => scrollTo('contact')}
+            className="rounded-full bg-amber px-6 py-3 text-label font-semibold text-dark tracking-[0.04em] hover:bg-amber-light transition-colors duration-300"
+          >
+            Let&apos;s Connect
           </button>
         </div>
 
+        {/* Mobile Nav */}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
-            <button className="md:hidden p-2 text-ink" aria-label="Open menu">
-              <Menu className="h-5 w-5" />
+            <button
+              className="md:hidden flex items-center justify-center h-10 w-10 rounded-lg text-text-light hover:text-amber transition-colors"
+              aria-label="Open menu"
+            >
+              <Menu className="h-6 w-6" />
             </button>
           </SheetTrigger>
-          <SheetContent side="right" className="bg-cream border-ink/10 w-[280px]">
+          <SheetContent side="right" className="bg-dark border-text-light/10 w-[280px]">
             <SheetHeader>
-              <SheetTitle className="font-display text-ink text-left">Vishal Ghosh</SheetTitle>
+              <SheetTitle className="font-display text-text-light text-left">Vishal Ghosh</SheetTitle>
             </SheetHeader>
-            <nav className="mt-8 flex flex-col gap-1">
+            <nav className="mt-8 flex flex-col gap-2">
               {navLinks.map((link) => (
                 <SheetClose asChild key={link.id}>
                   <button
                     onClick={() => scrollTo(link.id)}
-                    className="text-left px-3 py-3 text-body text-ink hover:text-accent rounded-lg transition-colors"
+                    className="text-left px-4 py-3 text-body font-medium text-text-light hover:text-amber hover:bg-text-light/5 rounded-lg transition-colors"
                   >
                     {link.label}
                   </button>
                 </SheetClose>
               ))}
               <SheetClose asChild>
-                <button onClick={() => scrollTo('contact')} className="mt-4 btn-primary w-full">
-                  Let&apos;s talk
+                <button
+                  onClick={() => scrollTo('contact')}
+                  className="mt-4 rounded-full bg-amber px-6 py-3 text-label font-semibold text-dark tracking-[0.04em] hover:bg-amber-light transition-colors"
+                >
+                  Let&apos;s Connect
                 </button>
               </SheetClose>
             </nav>

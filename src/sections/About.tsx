@@ -1,65 +1,61 @@
+import InteractiveGrid from '../components/InteractiveGrid';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 export default function About() {
-  const ref = useScrollAnimation<HTMLDivElement>('fadeUp');
+  const headingRef = useScrollAnimation<HTMLHeadingElement>('fadeUp', { delay: 0.2 });
+  const bodyRef = useScrollAnimation<HTMLParagraphElement>('fadeUp', { delay: 0.3 });
+  const photoRef = useScrollAnimation<HTMLDivElement>('fadeUp', { delay: 0.15 });
 
   return (
-    <section id="about" className="section-pad bg-cream-dark/30 border-t border-ink/8">
-      <div className="section-container">
-        <div ref={ref} className="opacity-0 grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16 items-start">
-          <div className="lg:sticky lg:top-28">
-            <div className="aspect-[4/5] max-w-[280px] overflow-hidden rounded-lg shadow-[0_24px_60px_-20px_rgba(28,25,23,0.2)]">
+    <section id="about" className="relative w-full bg-light">
+      <div className="pt-32 pb-12">
+        <InteractiveGrid />
+      </div>
+
+      <div className="section-container pb-32">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 max-w-[960px] mx-auto">
+          <div ref={photoRef} className="shrink-0">
+            <div className="h-64 w-64 sm:h-72 sm:w-72 rounded-2xl overflow-hidden shadow-lg ring-1 ring-dark/10">
               <img
                 src="/images/profile.png"
-                alt="Vishal Ghosh"
+                alt="Vishal Ghosh — Senior Data Scientist"
                 className="h-full w-full object-cover object-top"
               />
             </div>
           </div>
 
-          <div>
-            <p className="text-eyebrow">A short intro</p>
-            <h2 className="mt-4 font-display text-display-lg text-ink leading-[1.08]">
-              From IIT (BHU) to production AI — six years building systems that ship.
+          <div className="text-center lg:text-left">
+            <h2
+              ref={headingRef}
+              className="font-display text-display-lg text-dark leading-[1.1] tracking-[-0.01em]"
+            >
+              Science &amp; Intuition
             </h2>
 
-            <div className="mt-8 space-y-5 text-body-lg">
-              <p>
-                I came to data science through engineering — a B.Tech from IIT (BHU) gave me the
-                mathematical foundation; six years across o9 Solutions, Sigmoid, and BytesCare taught
-                me what it takes to move models from notebooks into production.
-              </p>
-              <p>
-                Today at o9 Solutions, I lead forecasting workstreams across 150+ brands — ensemble
-                methods, demand normalization, and a Claude-based knowledge assistant that cuts
-                ramp-up time for new users. Previously at Sigmoid, I architected GenAI pipelines,
-                demand forecasting engines, and supply chain optimizers that consistently beat
-                industry benchmarks.
-              </p>
-              <p>
-                Recognized with the Bravo Award at Sigmoid and two rapid promotions for continuous
-                outperformance. I combine rigorous modeling with intuitive product thinking — whether
-                fine-tuning Hugging Face models or designing PyShiny decision-support tools.
-              </p>
-            </div>
+            <p ref={bodyRef} className="mt-6 text-body text-dark/70">
+              With over 6 years of experience in data science and AI leadership, I have led
+              cross-functional teams to build enterprise-grade forecasting systems, GenAI document
+              intelligence pipelines, and supply chain optimizers. Currently at o9 Solutions, I
+              deliver forecast accuracy improvements across 150+ brands. Previously at Sigmoid, I
+              architected RAG-based solutions and demand forecasting engines that consistently
+              outperformed industry benchmarks.
+            </p>
 
-            <div className="mt-10 flex flex-wrap gap-2">
-              {['GenAI', 'Forecasting', 'Optimization', 'Computer Vision', 'MLOps', 'Ensemble ML'].map(
-                (skill) => (
-                  <span key={skill} className="tag-pill">
-                    {skill}
-                  </span>
-                )
-              )}
-            </div>
+            <p className="mt-4 text-body text-dark/70">
+              B.Tech from IIT (BHU), Varanasi — I combine rigorous mathematical modeling with
+              intuitive product thinking. Recognized with the Bravo Award at Sigmoid and two rapid
+              promotions for continuous outperformance.
+            </p>
 
-            <div className="mt-12 pt-8 border-t border-ink/10">
-              <p className="text-eyebrow mb-4">Education &amp; recognition</p>
-              <ul className="space-y-3 text-body">
-                <li>B.Tech — IIT (BHU), Varanasi · 2019</li>
-                <li>Bravo Award — Sigmoid (Quick Learner)</li>
-                <li>Two promotions in under a year each for continuous outperformance</li>
-              </ul>
+            <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-3">
+              {['GenAI', 'Forecasting', 'Optimization', 'Computer Vision', 'MLOps'].map((skill) => (
+                <span
+                  key={skill}
+                  className="rounded-full border border-dark/10 bg-white px-4 py-1.5 text-label font-medium text-dark/80"
+                >
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
         </div>
