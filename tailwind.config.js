@@ -48,14 +48,21 @@ module.exports = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Custom design tokens
+        // Editorial palette
+        cream: "#FAF7F2",
+        "cream-dark": "#F0EBE3",
+        ink: "#1C1917",
+        "ink-muted": "#57534E",
+        accent: "#B45309",
+        "accent-light": "#D97706",
+        // Legacy tokens (kept for components not yet migrated)
         dark: "#110F0F",
         "dark-mid": "#1E1E1E",
-        light: "#F7F7F7",
+        light: "#FAF7F2",
         "text-light": "#EAEAEA",
-        amber: "#E48A18",
-        "amber-light": "#F5AF4B",
-        "muted-text": "#888888",
+        amber: "#B45309",
+        "amber-light": "#D97706",
+        "muted-text": "#57534E",
       },
       fontFamily: {
         serif: ['"Instrument Serif"', 'Georgia', 'serif'],

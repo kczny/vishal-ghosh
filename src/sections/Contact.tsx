@@ -1,144 +1,52 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import MagneticButton from '../components/MagneticButton';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function Contact() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const infoRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
-
-    const tweens: gsap.core.Tween[] = [];
-
-    if (titleRef.current) {
-      tweens.push(
-        gsap.fromTo(
-          titleRef.current,
-          { opacity: 0, y: 60 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: titleRef.current,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        )
-      );
-    }
-
-    if (ctaRef.current) {
-      tweens.push(
-        gsap.fromTo(
-          ctaRef.current,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            delay: 0.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: ctaRef.current,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        )
-      );
-    }
-
-    if (infoRef.current) {
-      tweens.push(
-        gsap.fromTo(
-          infoRef.current,
-          { opacity: 0 },
-          {
-            opacity: 1,
-            duration: 0.8,
-            delay: 0.4,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: infoRef.current,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        )
-      );
-    }
-
-    return () => {
-      tweens.forEach((t) => t.kill());
-    };
-  }, []);
+  const ref = useScrollAnimation<HTMLDivElement>('fadeUp');
 
   return (
-    <section id="contact" className="relative w-full bg-dark pt-40 pb-20">
-      <div className="section-container text-center">
-        <div className="mb-6 flex justify-center">
-          <span className="text-eyebrow">Get in touch</span>
-        </div>
-        <h2
-          ref={titleRef}
-          className="font-display text-display-xl text-text-light leading-[1.05] tracking-[-0.02em] opacity-0"
-        >
-          Let&apos;s build something
-          <br />
-          <em className="italic text-amber">intelligent</em>
-          <br />
-          together
-        </h2>
+    <section id="contact" className="section-pad bg-ink text-cream">
+      <div className="section-container">
+        <div ref={ref} className="opacity-0 max-w-[640px]">
+          <p className="text-eyebrow !text-cream/50">Get in touch</p>
+          <h2 className="mt-4 font-display text-display-lg text-cream leading-[1.08]">
+            Let&apos;s build something intelligent together.
+          </h2>
+          <p className="mt-6 text-body-lg !text-cream/70">
+            Open to conversations about forecasting systems, GenAI architecture, and production ML
+            — whether that&apos;s a role, a collaboration, or a hard problem worth solving.
+          </p>
 
-        <div ref={ctaRef} className="mt-12 opacity-0">
-          <MagneticButton
-            href="mailto:vishal.ghosh108@gmail.com"
-            className="rounded-full bg-amber px-10 py-4 text-body font-semibold text-dark tracking-[0.02em] hover:bg-amber-light transition-colors duration-300"
-          >
-            Start a Conversation
-          </MagneticButton>
-        </div>
+          <div className="mt-10">
+            <MagneticButton
+              href="mailto:vishal.ghosh108@gmail.com"
+              className="btn-primary !bg-cream !text-ink hover:!bg-cream/90"
+            >
+              Start a conversation
+            </MagneticButton>
+          </div>
 
-        <div
-          ref={infoRef}
-          className="mt-20 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 opacity-0"
-        >
-          <a
-            href="mailto:vishal.ghosh108@gmail.com"
-            className="text-mono-label text-muted-text hover:text-text-light transition-colors duration-300"
-          >
-            vishal.ghosh108@gmail.com
-          </a>
-          <a
-            href="tel:+917991120062"
-            className="text-mono-label text-muted-text hover:text-text-light transition-colors duration-300"
-          >
-            +91-7991120062
-          </a>
-          <a
-            href="https://linkedin.com/in/vishal-ghosh"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-mono-label text-muted-text hover:text-text-light transition-colors duration-300"
-          >
-            linkedin.com/in/vishal-ghosh
-          </a>
+          <div className="mt-16 flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-10">
+            <a href="mailto:vishal.ghosh108@gmail.com" className="text-meta !text-cream/60 hover:!text-cream transition-colors">
+              vishal.ghosh108@gmail.com
+            </a>
+            <a href="tel:+917991120062" className="text-meta !text-cream/60 hover:!text-cream transition-colors">
+              +91-7991120062
+            </a>
+            <a
+              href="https://linkedin.com/in/vishal-ghosh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-meta !text-cream/60 hover:!text-cream transition-colors"
+            >
+              linkedin.com/in/vishal-ghosh
+            </a>
+          </div>
         </div>
 
-        <div className="mt-20 flex flex-col sm:flex-row items-center justify-between border-t border-text-light/10 pt-6">
-          <span className="text-label text-muted-text">Vishal Ghosh &middot; 2026</span>
-          <span className="text-label text-muted-text mt-2 sm:mt-0">
-            Designed with precision
-          </span>
+        <div className="mt-24 pt-8 border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <span className="text-meta !text-cream/40">Vishal Ghosh · 2026</span>
+          <span className="text-meta !text-cream/40">Designed with precision</span>
         </div>
       </div>
     </section>
