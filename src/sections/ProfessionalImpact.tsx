@@ -2,14 +2,15 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Carousel3D from '../components/Carousel3D';
+import CountUpStat from '../components/CountUpStat';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const metrics = [
-  { value: '6+', label: 'Years of Experience' },
-  { value: '150+', label: 'Brands Impacted' },
-  { value: '30+', label: 'Exogenous Signals Integrated' },
-  { value: '28%', label: 'Forecast Accuracy Improvement' },
+  { end: 6, suffix: '+', label: 'Years of Experience' },
+  { end: 150, suffix: '+', label: 'Brands Impacted' },
+  { end: 30, suffix: '+', label: 'Exogenous Signals Integrated' },
+  { end: 28, suffix: '%', label: 'Forecast Accuracy Improvement' },
 ];
 
 const education = [
@@ -91,23 +92,24 @@ export default function ProfessionalImpact() {
   return (
     <section id="impact" className="relative w-full bg-light py-32">
       <div className="section-container">
-        <h2
-          ref={headerRef}
-          className="font-display text-display-lg text-dark leading-[1.1] tracking-[-0.01em] text-center opacity-0"
-        >
-          Professional Impact
-        </h2>
+        <div ref={headerRef} className="text-center opacity-0">
+          <span className="text-eyebrow">By the numbers</span>
+          <h2 className="mt-4 font-display text-display-lg text-dark leading-[1.1] tracking-[-0.01em]">
+            Professional Impact
+          </h2>
+        </div>
 
         <div
           ref={metricsRef}
           className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12"
         >
           {metrics.map((m, i) => (
-            <div key={i} className="text-center opacity-0">
+            <div key={i} className="text-center opacity-0 group">
               <div className="font-body font-semibold text-amber leading-none tracking-[-0.02em] text-display-xl">
-                {m.value}
+                <CountUpStat end={m.end} suffix={m.suffix} />
               </div>
-              <div className="mt-2 text-label font-medium text-muted-text tracking-[0.02em]">
+              <div className="mx-auto mt-4 h-px w-12 bg-amber/30 transition-all duration-500 group-hover:w-20" />
+              <div className="mt-3 text-label font-medium text-muted-text tracking-[0.02em]">
                 {m.label}
               </div>
             </div>

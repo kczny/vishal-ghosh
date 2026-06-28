@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import MagneticButton from '../components/MagneticButton';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -84,6 +85,9 @@ export default function Contact() {
   return (
     <section id="contact" className="relative w-full bg-dark pt-40 pb-20">
       <div className="section-container text-center">
+        <div className="mb-6 flex justify-center">
+          <span className="text-eyebrow">Get in touch</span>
+        </div>
         <h2
           ref={titleRef}
           className="font-display text-display-xl text-text-light leading-[1.05] tracking-[-0.02em] opacity-0"
@@ -96,12 +100,12 @@ export default function Contact() {
         </h2>
 
         <div ref={ctaRef} className="mt-12 opacity-0">
-          <a
+          <MagneticButton
             href="mailto:vishal.ghosh108@gmail.com"
-            className="inline-block rounded-full bg-amber px-10 py-4 text-body font-semibold text-dark tracking-[0.02em] hover:bg-amber-light hover:scale-105 transition-all duration-300"
+            className="rounded-full bg-amber px-10 py-4 text-body font-semibold text-dark tracking-[0.02em] hover:bg-amber-light transition-colors duration-300"
           >
             Start a Conversation
-          </a>
+          </MagneticButton>
         </div>
 
         <div
@@ -110,13 +114,13 @@ export default function Contact() {
         >
           <a
             href="mailto:vishal.ghosh108@gmail.com"
-            className="text-label text-muted-text hover:text-text-light transition-colors duration-300"
+            className="text-mono-label text-muted-text hover:text-text-light transition-colors duration-300"
           >
             vishal.ghosh108@gmail.com
           </a>
           <a
             href="tel:+917991120062"
-            className="text-label text-muted-text hover:text-text-light transition-colors duration-300"
+            className="text-mono-label text-muted-text hover:text-text-light transition-colors duration-300"
           >
             +91-7991120062
           </a>
@@ -124,7 +128,7 @@ export default function Contact() {
             href="https://linkedin.com/in/vishal-ghosh"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-label text-muted-text hover:text-text-light transition-colors duration-300"
+            className="text-mono-label text-muted-text hover:text-text-light transition-colors duration-300"
           >
             linkedin.com/in/vishal-ghosh
           </a>

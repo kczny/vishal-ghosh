@@ -60,6 +60,7 @@ module.exports = {
       fontFamily: {
         serif: ['"Instrument Serif"', 'Georgia', 'serif'],
         sans: ['"Instrument Sans"', 'system-ui', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",
@@ -76,6 +77,14 @@ module.exports = {
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "grid-pan": {
+          "0%": { backgroundPosition: "0 0" },
+          "100%": { backgroundPosition: "40px 40px" },
+        },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
@@ -100,6 +109,8 @@ module.exports = {
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         "float": "float 6s ease-in-out infinite",
         "pulse-dot": "pulse-dot 2s ease-in-out infinite",
+        "grid-pan": "grid-pan 3s linear infinite",
+        "shimmer": "shimmer 3s ease-in-out infinite",
       },
     },
   },

@@ -12,6 +12,7 @@ import {
 const navLinks = [
   { label: 'About', id: 'about' },
   { label: 'Experience', id: 'experience' },
+  { label: 'Forecasting', id: 'forecasting' },
   { label: 'Projects', id: 'projects' },
   { label: 'Impact', id: 'impact' },
   { label: 'Contact', id: 'contact' },
@@ -20,6 +21,7 @@ const navLinks = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -28,6 +30,27 @@ export default function Navigation() {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Scroll-spy: highlight the section currently in view
+  useEffect(() => {
+    const sections = navLinks
+      .map((l) => document.getElementById(l.id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
   }, []);
 
   const scrollTo = (id: string) => {
@@ -57,16 +80,26 @@ export default function Navigation() {
         </button>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => scrollTo(link.id)}
-              className="text-label font-medium text-text-light tracking-[0.02em] hover:text-amber transition-colors duration-300"
-            >
-              {link.label}
-            </button>
-          ))}
+        <div className="hidden md:flex items-center gap-7">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <button
+                key={link.id}
+                onClick={() => scrollTo(link.id)}
+                className={`relative text-label font-medium tracking-[0.02em] transition-colors duration-300 ${
+                  isActive ? 'text-amber' : 'text-text-light hover:text-amber'
+                }`}
+              >
+                {link.label}
+                <span
+                  className={`absolute -bottom-1.5 left-0 h-px bg-amber transition-all duration-300 ${
+                    isActive ? 'w-full' : 'w-0'
+                  }`}
+                />
+              </button>
+            );
+          })}
           <button
             onClick={() => scrollTo('contact')}
             className="rounded-full bg-amber px-6 py-3 text-label font-semibold text-dark tracking-[0.04em] hover:bg-amber-light transition-colors duration-300"

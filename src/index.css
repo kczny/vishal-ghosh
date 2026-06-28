@@ -84,4 +84,41 @@
   .glass-card {
     @apply rounded-2xl border border-text-light/[0.06] bg-dark-mid/40 backdrop-blur-xl;
   }
+
+  /* Editorial eyebrow label used to head every section (mono, tracked-out) */
+  .text-eyebrow {
+    font-family: var(--font-mono);
+    @apply text-[11px] font-medium uppercase tracking-[0.28em] text-amber;
+  }
+
+  /* Mono data/telemetry label */
+  .text-mono-label {
+    font-family: var(--font-mono);
+    @apply text-[12px] tracking-[0.04em];
+  }
+
+  /* Surface cards for both light and dark backgrounds */
+  .surface-card-dark {
+    @apply rounded-2xl border border-text-light/[0.08] bg-dark-mid/50 backdrop-blur-xl;
+  }
+
+  .surface-card-light {
+    @apply rounded-2xl border border-dark/[0.08] bg-white/70 backdrop-blur-sm;
+  }
+
+  .hairline-dark {
+    @apply h-px w-full bg-text-light/10;
+  }
+
+  .hairline-light {
+    @apply h-px w-full bg-dark/10;
+  }
+}
+
+/* Faint technical grid backdrop for data-heavy sections */
+.tech-grid-bg {
+  background-image:
+    linear-gradient(rgba(228, 138, 24, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(228, 138, 24, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
 }

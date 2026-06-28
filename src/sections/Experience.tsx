@@ -101,11 +101,11 @@ export default function Experience() {
     <section id="experience" ref={sectionRef} className="relative w-full bg-light py-32">
       <div className="section-container">
         <div ref={headerRef} className="mb-20 opacity-0">
-          <span className="text-label font-medium text-amber tracking-[0.02em]">Career</span>
+          <span className="text-eyebrow">Career</span>
           <h2 className="mt-4 font-display text-display-lg text-dark leading-[1.1] tracking-[-0.01em]">
             Professional Experience
           </h2>
-          <div className="mt-6 h-px w-full bg-dark/10" />
+          <div className="mt-6 hairline-light" />
         </div>
 
         <div className="relative">
@@ -124,16 +124,16 @@ export default function Experience() {
                   <span className="h-3 w-3 rounded-full bg-amber ring-4 ring-light" />
                 </div>
 
-                <div className="glass-card bg-white/60 border-dark/10 p-8 md:p-10 shadow-sm">
+                <div className="surface-card-light p-8 md:p-10 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-amber/30">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                     <div>
                       <h3 className="font-display text-display-md text-dark leading-[1.2]">
                         {exp.company}
                       </h3>
                       <p className="mt-1 text-body font-medium text-dark/80">{exp.role}</p>
-                      <p className="mt-1 text-label text-muted-text">{exp.period}</p>
+                      <p className="mt-1 text-mono-label text-muted-text">{exp.period}</p>
                     </div>
-                    <span className="inline-flex self-start rounded-full bg-amber/10 px-4 py-1.5 text-label font-semibold text-amber">
+                    <span className="inline-flex self-start rounded-full bg-amber/10 px-4 py-1.5 text-mono-label font-semibold text-amber">
                       {exp.metric}
                     </span>
                   </div>
