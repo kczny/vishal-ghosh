@@ -7,25 +7,46 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
-    tag: 'GenAI \u00B7 Computer Vision \u00B7 NLP',
+    tag: 'GenAI · Computer Vision · NLP',
     title: 'Enterprise GenAI Chatbot',
     description:
       'Led cross-functional teams in delivering an enterprise-grade GenAI chatbot overseeing OCR, document classification, and summarization pipelines. Architected open-source OCR workflows saving ~$55K in LLM costs, integrated Vision Transformers, and fine-tuned Hugging Face models for document intelligence.',
     metric: '~$55K cost savings',
   },
   {
-    tag: 'Time-Series \u00B7 Ensemble Modeling \u00B7 Prophet \u00B7 LSTM',
-    title: 'Global Demand Forecasting Engine',
+    tag: 'GenAI · RAG · Knowledge Systems',
+    title: 'Claude Knowledge Assistant',
     description:
-      'Directed the design and deployment of enterprise-grade forecasting systems integrating Prophet, LSTM, XGBoost, and ARIMA to deliver real-time demand predictions for 70+ pharmaceutical products across US and Japan. Consistently outperformed Amazon Forecast by 10-30% across confidence intervals.',
-    metric: '70+ products \u00B7 10-30% improvement',
+      'Designed a Claude-based internal knowledge assistant using a curated domain corpus (platform docs, IBPL queries, forecasting use cases), cutting new user ramp-up time and enabling self-serve troubleshooting for 80%+ of common platform issues.',
+    metric: '80%+ self-serve resolution',
   },
   {
-    tag: 'Optimization \u00B7 MILP \u00B7 PyShiny \u00B7 Sustainability',
+    tag: 'Time-Series · Ensemble Modeling · Prophet · LSTM',
+    title: 'Global Demand Forecasting Engine',
+    description:
+      'Directed the design and deployment of enterprise-grade forecasting systems integrating Prophet, LSTM, XGBoost, and ARIMA to deliver real-time demand predictions for 70+ pharmaceutical products across US and Japan. Consistently outperformed Amazon Forecast by 10–30% across confidence intervals.',
+    metric: '70+ products · 10–30% improvement',
+  },
+  {
+    tag: 'Deep Learning · CNN · NLP',
+    title: 'Brand Matching Engine',
+    description:
+      'Led the transformation of brand identification in product reviews by replacing manual hand-matching with a custom CNN-based model, achieving 93% accuracy in top-3 brand recognition. Established rigorous baselines using Jaccard, Cosine, and Record Linkage metrics.',
+    metric: '93% top-3 accuracy',
+  },
+  {
+    tag: 'Optimization · MILP · PyShiny · Sustainability',
     title: 'Supply Chain Logistics Optimizer',
     description:
       'Designed and deployed an optimization framework to consolidate LTL shipments into FTL over configurable time horizons, optimizing for trade term benefits, carbon emissions, and shipment costs using Mixed Integer Linear Programming. Built a custom PyShiny decision-support tool from scratch.',
     metric: 'Carbon + Cost optimized',
+  },
+  {
+    tag: 'Predictive Analytics · D2C · Media Mix',
+    title: 'D2C Analytics Platform',
+    description:
+      'Developed advanced predictive models to forecast sales of ~600 products (>$50M revenue), achieving ~20% MAPE. Designed media mix simulations to quantify channel impact on AOV, traffic, and conversions, and reduced ~150 features to 60 key drivers using SHAP analysis.',
+    metric: '~20% MAPE · $50M+ revenue',
   },
 ];
 
@@ -40,7 +61,6 @@ export default function FeaturedProjects() {
 
     const triggers: ScrollTrigger[] = [];
 
-    // Header sticky + fade
     if (headerRef.current) {
       gsap.fromTo(
         headerRef.current,
@@ -59,7 +79,6 @@ export default function FeaturedProjects() {
       );
     }
 
-    // Cards stagger
     cardRefs.current.forEach((card, i) => {
       if (!card) return;
       const st = ScrollTrigger.create({
@@ -73,7 +92,7 @@ export default function FeaturedProjects() {
               opacity: 1,
               y: 0,
               duration: 0.8,
-              delay: i * 0.15,
+              delay: i * 0.1,
               ease: 'power3.out',
             }
           );
@@ -92,59 +111,45 @@ export default function FeaturedProjects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative w-full"
-      style={{ minHeight: '200vh', background: '#110F0F' }}
+      className="relative w-full bg-dark"
+      style={{ minHeight: '200vh' }}
     >
-      {/* Data Stream Background */}
       <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ opacity: 0.2, mixBlendMode: 'screen' }}
+        className="absolute inset-0 overflow-hidden opacity-20 mix-blend-screen"
+        aria-hidden="true"
       >
         <DataStream />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto max-w-[900px] px-6 py-32">
-        {/* Section Header */}
+      <div className="relative z-10 section-container py-32 max-w-[900px]">
         <div ref={headerRef} className="mb-24 opacity-0">
-          <h2
-            className="font-serif text-[#EAEAEA] leading-[1.1] tracking-[-0.01em]"
-            style={{ fontSize: 'clamp(36px, 5vw, 72px)' }}
-          >
+          <span className="text-label font-medium text-amber tracking-[0.02em]">Work</span>
+          <h2 className="mt-4 font-display text-display-lg text-text-light leading-[1.1] tracking-[-0.01em]">
             Featured Projects
           </h2>
-          <div className="mt-6 h-[1px] w-full bg-[rgba(234,234,234,0.1)]" />
+          <div className="mt-6 h-px w-full bg-text-light/10" />
         </div>
 
-        {/* Project Cards */}
-        <div className="flex flex-col gap-24">
+        <div className="flex flex-col gap-16">
           {projects.map((project, i) => (
             <div
               key={i}
-              ref={(el) => { cardRefs.current[i] = el; }}
-              className="opacity-0 rounded-2xl p-10 md:p-12"
-              style={{
-                background: 'rgba(30, 30, 30, 0.4)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.06)',
+              ref={(el) => {
+                cardRefs.current[i] = el;
               }}
+              className="opacity-0 glass-card p-8 md:p-12"
             >
-              <span className="text-sm font-medium text-[#E48A18] tracking-[0.02em]">
+              <span className="text-label font-medium text-amber tracking-[0.02em]">
                 {project.tag}
               </span>
 
-              <h3 className="mt-4 font-serif text-[32px] text-[#EAEAEA] leading-[1.2]">
+              <h3 className="mt-4 font-display text-display-md text-text-light leading-[1.2]">
                 {project.title}
               </h3>
 
-              <p className="mt-4 text-[15px] leading-[1.6] text-[#888888]">
-                {project.description}
-              </p>
+              <p className="mt-4 text-body text-muted-text">{project.description}</p>
 
-              <div
-                className="mt-8 font-sans font-semibold text-[#E48A18] leading-[1] tracking-[-0.02em]"
-                style={{ fontSize: 'clamp(32px, 4vw, 56px)' }}
-              >
+              <div className="mt-8 font-body font-semibold text-amber leading-none tracking-[-0.02em] text-display-md">
                 {project.metric}
               </div>
             </div>

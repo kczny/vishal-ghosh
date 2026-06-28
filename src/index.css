@@ -39,14 +39,49 @@
 
   body {
     font-family: var(--font-sans);
-    background-color: #110F0F;
-    color: #EAEAEA;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply bg-dark text-text-light antialiased;
     overflow-x: hidden;
   }
 
   html {
     scroll-behavior: auto;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-serif);
+  }
+
+  .font-body {
+    font-family: var(--font-sans);
+  }
+
+  .text-display-xl {
+    font-size: clamp(40px, 7vw, 96px);
+  }
+
+  .text-display-lg {
+    font-size: clamp(32px, 5vw, 72px);
+  }
+
+  .text-display-md {
+    font-size: clamp(24px, 3vw, 40px);
+  }
+
+  .text-body {
+    @apply text-[15px] leading-[1.6];
+  }
+
+  .text-label {
+    @apply text-sm leading-none;
+  }
+
+  .section-container {
+    @apply mx-auto max-w-[1200px] px-6;
+  }
+
+  .glass-card {
+    @apply rounded-2xl border border-text-light/[0.06] bg-dark-mid/40 backdrop-blur-xl;
   }
 }

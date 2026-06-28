@@ -82,58 +82,57 @@ export default function Contact() {
   }, []);
 
   return (
-    <section id="contact" className="relative w-full bg-[#110F0F] pt-40 pb-20">
-      <div className="mx-auto max-w-[1200px] px-6 text-center">
-        {/* CTA Title */}
+    <section id="contact" className="relative w-full bg-dark pt-40 pb-20">
+      <div className="section-container text-center">
         <h2
           ref={titleRef}
-          className="font-serif text-[#EAEAEA] leading-[1.05] tracking-[-0.02em] opacity-0"
-          style={{ fontSize: 'clamp(48px, 8vw, 112px)' }}
+          className="font-display text-display-xl text-text-light leading-[1.05] tracking-[-0.02em] opacity-0"
         >
-          Let's build something
+          Let&apos;s build something
           <br />
-          <em className="italic text-[#E48A18]">intelligent</em>
+          <em className="italic text-amber">intelligent</em>
           <br />
-          together.
+          together
         </h2>
 
-        {/* CTA Button */}
         <div ref={ctaRef} className="mt-12 opacity-0">
           <a
             href="mailto:vishal.ghosh108@gmail.com"
-            className="inline-block rounded-full bg-[#E48A18] px-10 py-4 text-base font-semibold text-[#110F0F] tracking-[0.02em] hover:bg-[#F5AF4B] hover:scale-105 transition-all duration-300"
+            className="inline-block rounded-full bg-amber px-10 py-4 text-body font-semibold text-dark tracking-[0.02em] hover:bg-amber-light hover:scale-105 transition-all duration-300"
           >
             Start a Conversation
           </a>
         </div>
 
-        {/* Contact Info */}
         <div
           ref={infoRef}
-          className="mt-20 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 opacity-0"
+          className="mt-20 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 opacity-0"
         >
           <a
             href="mailto:vishal.ghosh108@gmail.com"
-            className="text-sm text-[#888888] hover:text-[#EAEAEA] transition-colors duration-300"
+            className="text-label text-muted-text hover:text-text-light transition-colors duration-300"
           >
             vishal.ghosh108@gmail.com
+          </a>
+          <a
+            href="tel:+917991120062"
+            className="text-label text-muted-text hover:text-text-light transition-colors duration-300"
+          >
+            +91-7991120062
           </a>
           <a
             href="https://linkedin.com/in/vishal-ghosh"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-[#888888] hover:text-[#EAEAEA] transition-colors duration-300"
+            className="text-label text-muted-text hover:text-text-light transition-colors duration-300"
           >
             linkedin.com/in/vishal-ghosh
           </a>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="mt-20 flex flex-col sm:flex-row items-center justify-between border-t border-[rgba(234,234,234,0.08)] pt-6">
-          <span className="text-xs text-[#888888]">
-            Vishal Ghosh &middot; 2026
-          </span>
-          <span className="text-xs text-[#888888] mt-2 sm:mt-0">
+        <div className="mt-20 flex flex-col sm:flex-row items-center justify-between border-t border-text-light/10 pt-6">
+          <span className="text-label text-muted-text">Vishal Ghosh &middot; 2026</span>
+          <span className="text-label text-muted-text mt-2 sm:mt-0">
             Designed with precision
           </span>
         </div>

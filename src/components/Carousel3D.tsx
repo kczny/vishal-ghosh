@@ -182,7 +182,7 @@ export default function Carousel3D() {
         {competencies.map((comp, i) => (
           <span
             key={i}
-            className="text-xs font-medium text-[#888888] tracking-[0.02em]"
+            className="text-xs font-medium text-muted-text tracking-[0.02em]"
           >
             {comp.label}
           </span>
