@@ -1,4 +1,3 @@
-import InteractiveGrid from '../components/InteractiveGrid';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 export default function About() {
@@ -8,11 +7,7 @@ export default function About() {
 
   return (
     <section id="about" className="relative w-full bg-light">
-      <div className="pt-32 pb-12">
-        <InteractiveGrid />
-      </div>
-
-      <div className="section-container pb-32">
+      <div className="section-container pt-32 pb-32">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 max-w-[960px] mx-auto">
           <div ref={photoRef} className="shrink-0">
             <div className="h-64 w-64 sm:h-72 sm:w-72 rounded-2xl overflow-hidden shadow-lg ring-1 ring-dark/10">

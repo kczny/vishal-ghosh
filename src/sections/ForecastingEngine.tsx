@@ -38,10 +38,23 @@ export default function ForecastingEngine() {
       id="forecasting"
       className="relative w-full bg-dark py-32 overflow-hidden"
     >
-      {/* faint technical grid backdrop */}
-      <div className="absolute inset-0 tech-grid-bg opacity-40 pointer-events-none" aria-hidden="true" />
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+        aria-hidden="true"
+      >
+        <source src="/videos/forecasting-bg.mp4" type="video/mp4" />
+      </video>
+
       <div
-        className="absolute inset-0 bg-gradient-to-b from-dark via-transparent to-dark pointer-events-none"
+        className="absolute inset-0 bg-dark/80 pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-dark via-dark/40 to-dark pointer-events-none"
         aria-hidden="true"
       />
 
